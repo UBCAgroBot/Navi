@@ -1,12 +1,6 @@
 GENERATED_OBJS := submodule.o arg.o
 
-MODULE_OBJS+= $(addprefix $(OBJS_DIR)/, $(GENERATED_OBJS))
-BUILD_MODULES+= build_$(DIR)
-CLEAN_MODULES+= clean_$(DIR)
+include submodule.general.mk
 
-build_$(DIR):
-	$(CXX) -I $(INCLUDE_DIRS) -c $(DIR)/submodule.cpp -o $(OBJS_DIR)/submodule.o
-	$(CXX) -I $(INCLUDE_DIRS) -c $(DIR)/arg.cpp -o $(OBJS_DIR)/arg.o
-
+build_$(DIR): build_generic_arg.cpp build_generic_submodule.cpp
 clean_$(DIR):
-

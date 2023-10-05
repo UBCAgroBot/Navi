@@ -16,3 +16,7 @@ OUTPUT_BINARY := $(ROOT_DIR)/navi
 
 CLEAN_MODULES :=
 BUILD_MODULES := 
+
+
+build_generic_%.cpp:
+	$(CXX) -I $(INCLUDE_DIRS) -c $(DIR)/$*.cpp -o $(OBJS_DIR)/$*.o
