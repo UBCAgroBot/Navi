@@ -37,4 +37,4 @@ doc:
 	mkdir -p $(DOCS_OUTPUT_DIR)
 	cd $(DOCS_DIR) && doxygen $(DOCS_DIR)/doxygen-config
 
-.PHONY: mkobjdir mkbuilddir $(MODULES) $(BUILD_MODULES) $(CLEAN_MODULES) binary
+.PHONY: mkobjdir mkbuilddir $(MODULES) $(BUILD_MODULES) $(CLEAN_MODULES) $(TEST_MODULES) binary test_ALL
