@@ -29,5 +29,10 @@ default: mkobjdir mkbuilddir $(OBJS) $(MODULES) $(OUTPUT_BINARY)
 
 clean: $(CLEAN_MODULES)
 	rm -rf $(BUILD_DIR) $(OUTPUT_BINARY)
+	rm -rf $(DOCS_OUTPUT_DIR)
+
+doc:
+	mkdir -p $(DOCS_OUTPUT_DIR)
+	cd $(DOCS_DIR) && doxygen $(DOCS_DIR)/doxygen-config
 
 .PHONY: mkobjdir mkbuilddir $(MODULES) $(BUILD_MODULES) $(CLEAN_MODULES) binary

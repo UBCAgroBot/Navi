@@ -17,6 +17,8 @@ OUTPUT_BINARY := $(ROOT_DIR)/navi
 CLEAN_MODULES :=
 BUILD_MODULES := 
 
+DOCS_DIR := $(ROOT_DIR)/docs
+DOCS_OUTPUT_DIR := $(DOCS_DIR)/doxygen_output
 
 build_generic_%.cpp:
 	$(CXX) -I $(INCLUDE_DIRS) -c $(DIR)/$*.cpp -o $(OBJS_DIR)/$*.o
