@@ -31,6 +31,8 @@ clean: $(CLEAN_MODULES)
 	rm -rf $(BUILD_DIR) $(OUTPUT_BINARY)
 	rm -rf $(DOCS_OUTPUT_DIR)
 
+test_ALL: $(TEST_MODULES)
+
 doc:
 	mkdir -p $(DOCS_OUTPUT_DIR)
 	cd $(DOCS_DIR) && doxygen $(DOCS_DIR)/doxygen-config
