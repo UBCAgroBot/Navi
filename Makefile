@@ -22,7 +22,7 @@ $(OBJS_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -I $(INCLUDE_DIRS) -o $(OBJS_DIR)/$*.o -c $(SRC_DIR)/$*.cpp
 
 $(OUTPUT_BINARY): $(SRCS) $(BUILD_MODULES)
-	@echo "[[[[   BUILDING BINARY   ]]]]"
+	@echo "[[[[   BUILDING NAVI   ]]]]"
 	$(CXX) $(OBJS) $(MODULE_OBJS) -o $(OUTPUT_BINARY)
 
 default: mkobjdir mkbuilddir $(OBJS) $(MODULES) $(OUTPUT_BINARY)
@@ -30,4 +30,4 @@ default: mkobjdir mkbuilddir $(OBJS) $(MODULES) $(OUTPUT_BINARY)
 clean: $(CLEAN_MODULES)
 	rm -rf $(BUILD_DIR) $(OUTPUT_BINARY)
 
-.PHONY: mkobjdir mkbuilddir $(OBJECTS) $(MODULES) $(BUILD_MODULES) $(CLEAN_MODULES) binary $(SRC_DIR)/%.cpp
+.PHONY: mkobjdir mkbuilddir $(MODULES) $(BUILD_MODULES) $(CLEAN_MODULES) binary
