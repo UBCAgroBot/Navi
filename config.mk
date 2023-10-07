@@ -21,5 +21,7 @@ TEST_MODULES :=
 DOCS_DIR := $(ROOT_DIR)/docs
 DOCS_OUTPUT_DIR := $(DOCS_DIR)/doxygen_output
 
-build_generic_%.cpp:
-	$(CXX) -I $(INCLUDE_DIRS) -c $(DIR)/$*.cpp -o $(OBJS_DIR)/$*.o
+define build
+	$(eval DRK := $(shell echo "$@" | cut -c 7-))
+	$(CXX) -I $(INCLUDE_DIRS) -c $(DRK)/$(1) -o $(OBJS_DIR)/$(basename $(1)).o
+endef

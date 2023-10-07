@@ -12,6 +12,9 @@ include config.mk
 DIR := $(SRC_DIR)/sample_submodule
 include $(DIR)/rules.mk
 
+DIR := $(SRC_DIR)/grass_killer
+include $(DIR)/rules.mk
+
 mkobjdir:
 	mkdir -p $(OBJS_DIR)
 
@@ -25,7 +28,10 @@ $(OUTPUT_BINARY): $(SRCS) $(BUILD_MODULES)
 	@echo "[[[[   BUILDING NAVI   ]]]]"
 	$(CXX) $(OBJS) $(MODULE_OBJS) -o $(OUTPUT_BINARY)
 
-default: mkobjdir mkbuilddir $(OBJS) $(MODULES) $(OUTPUT_BINARY)
+debug:
+	@echo $(BUILD_MODULES)
+
+default: debug mkobjdir mkbuilddir $(OBJS) $(MODULES) $(OUTPUT_BINARY)
 
 clean: $(CLEAN_MODULES)
 	rm -rf $(BUILD_DIR) $(OUTPUT_BINARY)
