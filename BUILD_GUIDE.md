@@ -13,7 +13,7 @@ In a linux shell, the following rules have been provided via the build system:
 - `make test_ALL`: test every submodule included in the project.
 - `make clean`: remove build files and return the repository to its original state.
 
-### Build Guide
+### Build Submodule
 1. Put module sources in `src/my_submodule_name/`. (Name the folder appropriately.)
 2. Put module header files (`*.hpp`, `*.h`) in the `include/` directory.
 3. Copy an example `rules.mk` into your submodule.
@@ -24,3 +24,10 @@ DIR := $(SRC_DIR)/sample_submodule
 include $(DIR)/rules.mk
 ```
 6. profit.
+
+### Documentation Notes
+One-line summaries of functions should be prefixed by `//!`.
+
+Multi-line detailed descriptions of functions should be surrounded by `/*!` and `*/`. 
+
+Refer to the example submodules for an example.
