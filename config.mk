@@ -24,5 +24,5 @@ DOCS_OUTPUT_DIR := $(DOCS_DIR)/doxygen_output
 
 define build
 	$(eval DRK := $(shell echo "$@" | cut -c 7-))
-	$(CXX) $(CXXFLAGS) -I $(INCLUDE_DIRS) -c $(DRK)/$(1) -o $(OBJS_DIR)/$(basename $(1)).o
+	$(CXX) $(CXXFLAGS) $(INCLUDE_DIRS:%=-I %) -c $(DRK)/$(1) -o $(OBJS_DIR)/$(basename $(1)).o
 endef
