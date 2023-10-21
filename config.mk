@@ -7,6 +7,7 @@ OBJS_DIR := $(BUILD_DIR)/objs
 
 CXX := g++
 CXXFLAGS := -std=c++20 -Wall 
+LINK_TIME_FLAGS := 
 
 SRCS := $(wildcard $(SRC_DIR)/*.cpp)
 MODULES := $(wildcard $(SRC_DIR)/*/)

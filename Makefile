@@ -25,8 +25,8 @@ $(OBJS_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -I $(INCLUDE_DIRS) -o $(OBJS_DIR)/$*.o -c $(SRC_DIR)/$*.cpp
 
 $(OUTPUT_BINARY): $(SRCS) $(BUILD_MODULES)
-	@echo "[[[[   BUILDING NAVI   ]]]]"
-	$(CXX) $(OBJS) $(MODULE_OBJS) -o $(OUTPUT_BINARY)
+	@echo "[[[[   LINKING NAVI   ]]]]"
+	$(CXX) $(LINK_TIME_FLAGS) $(OBJS) $(MODULE_OBJS) -o $(OUTPUT_BINARY)
 
 debug:
 	@echo $(BUILD_MODULES)
