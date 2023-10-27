@@ -8,6 +8,7 @@
 
 additional dependencies include:
 - `librealsense2` \[v.2.54.2\] - to drive the distance sensing camera
+- `opencv` \[v.4.8.1\] - to process images from the camera
 
 ### Build Commands
 In a linux shell, the following rules have been provided via the build system:
