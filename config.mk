@@ -6,7 +6,8 @@ BUILD_DIR := $(ROOT_DIR)/build
 OBJS_DIR := $(BUILD_DIR)/objs
 
 CXX := g++
-CXXFLAGS :=
+CXXFLAGS := -std=c++20 -Wall 
+LINK_TIME_FLAGS := 
 
 SRCS := $(wildcard $(SRC_DIR)/*.cpp)
 MODULES := $(wildcard $(SRC_DIR)/*/)
@@ -23,5 +24,5 @@ DOCS_OUTPUT_DIR := $(DOCS_DIR)/doxygen_output
 
 define build
 	$(eval DRK := $(shell echo "$@" | cut -c 7-))
-	$(CXX) -I $(INCLUDE_DIRS) -c $(DRK)/$(1) -o $(OBJS_DIR)/$(basename $(1)).o
+	$(CXX) $(CXXFLAGS) $(INCLUDE_DIRS:%=-I %) -c $(DRK)/$(1) -o $(OBJS_DIR)/$(basename $(1)).o
 endef
