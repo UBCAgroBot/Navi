@@ -3,6 +3,10 @@
 using namespace std;
 using namespace cv;
 
+/*!
+ * @brief Opens and displays the webcam video feed until termination.
+ * @return Returns 0 upon successful completion, else returns -1.
+ */
 int webcam() {
    Mat myImage;
    namedWindow("Webcam Video Feed");
