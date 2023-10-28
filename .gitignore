@@ -1,3 +1,7 @@
 docs/doxygen_output
 build/
 navi
+
+# IDE
+.vscode
+.idea
