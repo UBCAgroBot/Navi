@@ -2,6 +2,7 @@
 #include "main.hpp"
 #include "arg.hpp"
 #include "grass_killer.hpp"
+#include "webcam_interface.hpp"
 
 using namespace std;
 
@@ -19,5 +20,7 @@ int main(int argc, char* argv[])
 	value += argValue();
 	cout << helloworld << value << endl;
 	kill_some_grass();
+
+    webcam();
 	return 0;
 }

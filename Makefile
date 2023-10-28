@@ -15,6 +15,9 @@ include $(DIR)/rules.mk
 DIR := $(SRC_DIR)/grass_killer
 include $(DIR)/rules.mk
 
+DIR := $(SRC_DIR)/webcam_interface
+include $(DIR)/rules.mk
+
 mkobjdir:
 	mkdir -p $(OBJS_DIR)
 
@@ -26,7 +29,7 @@ $(OBJS_DIR)/%.o: $(SRC_DIR)/%.cpp
 
 $(OUTPUT_BINARY): $(SRCS) $(BUILD_MODULES)
 	@echo "[[[[   LINKING NAVI   ]]]]"
-	$(CXX) $(LINK_TIME_FLAGS) $(OBJS) $(MODULE_OBJS) -o $(OUTPUT_BINARY)
+	$(CXX) $(LINK_TIME_FLAGS) $(OBJS) $(MODULE_OBJS) $(LIBS) -o $(OUTPUT_BINARY)
 
 debug:
 	@echo $(BUILD_MODULES)
