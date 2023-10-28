@@ -1,9 +1,9 @@
-GENERATED_OBJS := measure.o
+GENERATED_OBJS := RealIntelCam.o
 
 include submodule.general.mk
 
 build_$(DIR):
-	$(CXX) $(CXXFLAGS) -I $(INCLUDE_DIRS) $(ROOT_DIR)/IntelRealSenseSDK/lib/x64/realsense2.lib -c $(DIR)/measure.cpp -o $(OBJS_DIR)/measure.o
+	$(CXX) $(CXXFLAGS) -I $(INCLUDE_DIRS) -c $(DIR)/RealIntelCam.cpp -o $(OBJS_DIR)/RealIntelCam.o
 clean_$(DIR):
 test_$(DIR):
 	@echo testing the module $(DIR)!
