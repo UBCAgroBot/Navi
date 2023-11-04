@@ -9,24 +9,28 @@ using namespace cv;
 typedef websocketpp::server<websocketpp::config::asio> server;
 
 void handle_connection(websocketpp::connection_hdl hdl, server& s, VideoCapture& cap) {
-    while (true) {
-        // Read frame from webcam
-        Mat frame;
-        cap >> frame;
+    try {
+        while (true) {
+            // Read frame from webcam
+            Mat frame;
+            cap >> frame;
 
-        // Check if frame is empty
-        if (!frame.empty()) {
-            // Convert OpenCV frame to byte vector
-            vector<uchar> buffer;
-            imencode(".jpg", frame, buffer);
+            // Check if frame is empty
+            if (!frame.empty()) {
+                // Convert OpenCV frame to byte vector
+                vector<uchar> buffer;
+                imencode(".jpg", frame, buffer);
 
-            // Send the frame as a binary message via WebSocket
-            s.send(hdl, buffer.data(), buffer.size(), websocketpp::frame::opcode::binary);
+                // Send the frame as a binary message via WebSocket
+                s.send(hdl, buffer.data(), buffer.size(), websocketpp::frame::opcode::binary);
+            }
+            else {
+                cerr << "Couldn't capture frame from webcam." << endl;
+                break;
+            }
         }
-        else {
-            cerr << "Couldn't capture frame from webcam." << endl;
-            break;
-        }
+    } catch (websocketpp::exception const & e) {
+        std::cout << "Caught websocket exception: " << e.what() << std::endl;
     }
 }
 
