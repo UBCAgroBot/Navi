@@ -6,8 +6,18 @@
 using namespace std;
 using namespace cv;
 
+// Alias for websocketpp server
 typedef websocketpp::server<websocketpp::config::asio> server;
 
+/*!
+ * Handles the connection to the WebSocket server.
+ * Captures frames from the webcam, encodes them,
+ * and sends them via the WebSocket connection.
+ *
+ * \param hdl The connection handle.
+ * \param s The WebSocket server.
+ * \param cap The OpenCV VideoCapture object.
+ */
 void handle_connection(websocketpp::connection_hdl hdl, server& s, VideoCapture& cap) {
     try {
         while (true) {
@@ -34,6 +44,16 @@ void handle_connection(websocketpp::connection_hdl hdl, server& s, VideoCapture&
     }
 }
 
+/*!
+ * Initializes and runs the WebSocket server, capturing frames
+ * from the webcam and sending them via open WebSocket connections.
+ *
+ * Clears all access log channels, initializes the OpenCV webcam,
+ * defines the WebSocket server connection handler, listens on port 6969,
+ * and finally starts the accept loop and the ASIO io_service event loop.
+ *
+ * \return 0 if the server ran successfully, otherwise -1.
+ */
 int webcam() {
     // Create a WebSocket server
     server s;
