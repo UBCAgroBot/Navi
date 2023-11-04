@@ -1,5 +1,5 @@
-WEBSOCKETPP_DIR := /path/to/websocketpp
-BOOST_DIR := /path/to/boost
+WEBSOCKETPP_DIR := /path/to/websocketpp/include
+BOOST_DIR := /path/to/boost/include
 
 TARGET_FOLDER := build
 INCLUDE_DIRS := $(ROOT_DIR)/include
