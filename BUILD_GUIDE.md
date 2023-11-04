@@ -10,7 +10,7 @@ additional dependencies include:
 - `librealsense2` \[v.2.54.2\] - to drive the distance sensing camera
 - `opencv` \[v.4.8.1\] - to process images from the camera
 - `WebSocket++` \[v.0.8.2\] - to create a websocket server
-  - `boost` \[v.1.83.0\] - to provide additional functionality to the websocket server
+  - `boost` \[v.1.83.0\] - required by `WebSocket++`
 
 ### Build Commands
 In a linux shell, the following rules have been provided via the build system:
