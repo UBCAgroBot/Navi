@@ -6,7 +6,7 @@ BUILD_DIR := $(ROOT_DIR)/build
 OBJS_DIR := $(BUILD_DIR)/objs
 
 CXX := g++
-CXXFLAGS := -std=c++20 -Wall `pkg-config --cflags opencv4`
+CXXFLAGS := -std=c++20 -Wall `pkg-config --cflags opencv4` -I /opt/homebrew/include -I /opt/homebrew/opt/boost/include
 LINK_TIME_FLAGS :=
 LIBS := `pkg-config --libs opencv4`
 

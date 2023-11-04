@@ -1,35 +1,61 @@
-#include<opencv2/opencv.hpp>
-#include<iostream>
+#include <websocketpp/config/asio_no_tls.hpp>
+#include <websocketpp/server.hpp>
+#include <opencv2/opencv.hpp>
+#include <thread>
+
 using namespace std;
 using namespace cv;
 
-/*!
- * @brief Opens and displays the webcam video feed until termination.
- * @return Returns 0 upon successful completion, else returns -1.
- */
+typedef websocketpp::server<websocketpp::config::asio> server;
+
+void handle_connection(websocketpp::connection_hdl hdl, server& s, VideoCapture& cap) {
+    while (true) {
+        // Read frame from webcam
+        Mat frame;
+        cap >> frame;
+
+        // Check if frame is empty
+        if (!frame.empty()) {
+            // Convert OpenCV frame to byte vector
+            vector<uchar> buffer;
+            imencode(".jpg", frame, buffer);
+
+            // Send the frame as a binary message via WebSocket
+            s.send(hdl, buffer.data(), buffer.size(), websocketpp::frame::opcode::binary);
+        }
+        else {
+            cerr << "Couldn't capture frame from webcam." << endl;
+            break;
+        }
+    }
+}
+
 int webcam() {
-   Mat myImage;
-   namedWindow("Webcam Video Feed");
-   VideoCapture cap(0);
+    // Create a WebSocket server
+    server s;
 
-   if (!cap.isOpened()) {
-      cout << "No webcam feed detected" << endl;
-      system("pause");
-      return -1;
-   }
+    // Clear all access log channels to prevent frames being logged
+    // If frames are logged, then it makes the WebSocket server very slow
+    s.clear_access_channels(websocketpp::log::alevel::all);
 
-   while (true) { 
-      cap >> myImage;
-      if (myImage.empty()) {
-         break;
-      }
+    // Initialize OpenCV webcam
+    VideoCapture cap(0);
+    if (!cap.isOpened()) {
+        cerr << "Couldn't open the webcam." << endl;
+        return -1;
+    }
 
-      imshow("Webcam Video Feed", myImage);
-      char c = (char)waitKey(25);
-      if (c == 27) {
-         break;
-      }
-   }
-   cap.release();
-   return 0;
+    // Define WebSocket server connection handler
+    s.set_open_handler([&s, &cap](websocketpp::connection_hdl hdl) {
+        thread video_thread(handle_connection, hdl, ref(s), ref(cap));
+        video_thread.detach();
+    });
+
+    // Listen on port 6969
+    s.init_asio();
+    s.listen(6969);
+    s.start_accept();
+    s.run();
+
+    return 0;
 }
