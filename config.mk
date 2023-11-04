@@ -1,3 +1,6 @@
+WEBSOCKETPP_DIR := /path/to/websocketpp
+BOOST_DIR := /path/to/boost
+
 TARGET_FOLDER := build
 INCLUDE_DIRS := $(ROOT_DIR)/include
 SRC_DIR := $(ROOT_DIR)/src
@@ -6,7 +9,7 @@ BUILD_DIR := $(ROOT_DIR)/build
 OBJS_DIR := $(BUILD_DIR)/objs
 
 CXX := g++
-CXXFLAGS := -std=c++20 -Wall `pkg-config --cflags opencv4` -I /opt/homebrew/opt/websocketpp/include -I /opt/homebrew/opt/boost/include
+CXXFLAGS := -std=c++20 -Wall `pkg-config --cflags opencv4` -I ${WEBSOCKETPP_DIR} -I $(BOOST_DIR)
 LINK_TIME_FLAGS :=
 LIBS := `pkg-config --libs opencv4`
 
