@@ -9,7 +9,7 @@ BUILD_DIR := $(ROOT_DIR)/build
 OBJS_DIR := $(BUILD_DIR)/objs
 
 CXX := g++
-CXXFLAGS := -std=c++20 -Wall `pkg-config --cflags opencv4` -I ${WEBSOCKETPP_DIR} -I $(BOOST_DIR)
+CXXFLAGS := -std=c++17 -Wall `pkg-config --cflags opencv4` -I ${WEBSOCKETPP_DIR} -I $(BOOST_DIR)
 LINK_TIME_FLAGS :=
 LIBS := `pkg-config --libs opencv4`
 
