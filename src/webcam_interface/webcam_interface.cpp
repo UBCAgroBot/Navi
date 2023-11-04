@@ -40,7 +40,7 @@ void handle_connection(websocketpp::connection_hdl hdl, server& s, VideoCapture&
             }
         }
     } catch (websocketpp::exception const & e) {
-        std::cout << "Caught websocket exception: " << e.what() << std::endl;
+        cout << "Caught websocket exception: " << e.what() << endl;
     }
 }
 
