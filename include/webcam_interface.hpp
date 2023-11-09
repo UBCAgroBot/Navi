@@ -3,4 +3,4 @@
 
 int webcam(void);
 
-#endif
+#endif // WEBCAM_INTERFACE_HPP
