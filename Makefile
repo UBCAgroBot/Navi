@@ -18,6 +18,9 @@ include $(DIR)/rules.mk
 DIR := $(SRC_DIR)/webcam_interface
 include $(DIR)/rules.mk
 
+DIR := $(SRC_DIR)/lidar
+include $(DIR)/rules.mk
+
 mkobjdir:
 	mkdir -p $(OBJS_DIR)
 
