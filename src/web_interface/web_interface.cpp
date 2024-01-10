@@ -1,6 +1,5 @@
 #include <websocketpp/config/asio_no_tls.hpp>
 #include <websocketpp/server.hpp>
-#include <opencv2/opencv.hpp>
 #include <thread>
 
 using namespace std;
@@ -18,29 +17,22 @@ typedef websocketpp::server<websocketpp::config::asio> server;
  * \param s The WebSocket server.
  * \param cap The OpenCV VideoCapture object.
  */
-void handle_connection(websocketpp::connection_hdl hdl, server& s, VideoCapture& cap) {
-    try {
-        while (true) {
-            // Read frame from webcam
-            Mat frame;
-            cap >> frame;
-
-            // Check if frame is empty
-            if (!frame.empty()) {
+void handle_connection(websocketpp::connection_hdl hdl, server& s, Mat *frame) {
+    while (true) {
+        try {
+            if (!frame->empty()) {
                 // Convert OpenCV frame to byte vector
                 vector<uchar> buffer;
-                imencode(".jpg", frame, buffer);
-
-                // Send the frame as a binary message via WebSocket
+                imencode(".jpg", *frame, buffer);
                 s.send(hdl, buffer.data(), buffer.size(), websocketpp::frame::opcode::binary);
             }
             else {
                 cerr << "Couldn't capture frame from webcam." << endl;
                 break;
             }
-        }
-    } catch (websocketpp::exception const & e) {
+        } catch (websocketpp::exception const & e) {
         cout << "Caught websocket exception: " << e.what() << endl;
+        }
     }
 }
 
@@ -54,24 +46,15 @@ void handle_connection(websocketpp::connection_hdl hdl, server& s, VideoCapture&
  *
  * \return 0 if the server ran successfully, otherwise -1.
  */
-int webcam() {
+int web(Mat *frame) {
     // Create a WebSocket server
     server s;
-
     // Clear all access log channels to prevent frames being logged
     // If frames are logged, then it makes the WebSocket server very slow
     s.clear_access_channels(websocketpp::log::alevel::all);
 
-    // Initialize OpenCV webcam
-    VideoCapture cap(0);
-    if (!cap.isOpened()) {
-        cerr << "Couldn't open the webcam." << endl;
-        return -1;
-    }
-
-    // Define WebSocket server connection handler
-    s.set_open_handler([&s, &cap](websocketpp::connection_hdl hdl) {
-        thread video_thread(handle_connection, hdl, ref(s), ref(cap));
+     s.set_open_handler([&s,frame](websocketpp::connection_hdl hdl) {
+        thread video_thread(handle_connection, hdl, ref(s), ref(frame));
         video_thread.detach();
     });
 
@@ -83,3 +66,4 @@ int webcam() {
 
     return 0;
 }
+
