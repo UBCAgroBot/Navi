@@ -1,8 +1,5 @@
-#include "submodule.hpp"
-#include "main.hpp"
-#include "arg.hpp"
-#include "grass_killer.hpp"
-#include "webcam_interface.hpp"
+#include "../include/interfaces.hpp"
+#include <opencv2/opencv.hpp>
 
 using namespace std;
 
@@ -12,15 +9,17 @@ using namespace std;
   \param argc number of arguments
   \param argv argument vector
  
-   \return nothing
+   \return exit status
  */
 int main(int argc, char* argv[])
 {
-	int value = getValue();
-	value += argValue();
-	cout << helloworld << value << endl;
-	kill_some_grass();
+	cv::VideoCapture webcam_cap;
+	cv::Mat web_frame;
+	interfaces::start_webcam(webcam_cap);
+	interfaces::start_websocket(&web_frame);
 
-    webcam();
+	while (1) {
+		webcam_cap >> web_frame;
+	}
 	return 0;
 }

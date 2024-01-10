@@ -9,13 +9,7 @@ MODULE_OBJS :=
 include config.mk
 
 # example: include a folder
-DIR := $(SRC_DIR)/sample_submodule
-include $(DIR)/rules.mk
-
-DIR := $(SRC_DIR)/grass_killer
-include $(DIR)/rules.mk
-
-DIR := $(SRC_DIR)/webcam_interface
+DIR := $(SRC_DIR)/interfaces
 include $(DIR)/rules.mk
 
 mkobjdir:
