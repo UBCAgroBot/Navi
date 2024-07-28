@@ -9,7 +9,8 @@ MODULE_OBJS :=
 include config.mk
 
 # example: include a folder
-DIR := $(SRC_DIR)/interfaces
+DIR := $(SRC_DIR)/imu_interface
+# interfaces
 include $(DIR)/rules.mk
 
 mkobjdir:
